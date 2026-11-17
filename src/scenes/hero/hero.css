@@ -1,0 +1,152 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: calc(var(--nav-h) + 16px) var(--gutter) clamp(84px, 14vh, 120px);
+  overflow: clip;
+}
+
+.hero__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: var(--max);
+  transform-origin: 50% 40%;
+}
+
+.hero__kicker {
+  display: flex;
+  gap: 12px;
+  margin-bottom: clamp(16px, 3vh, 32px);
+  font-family: var(--f-mono);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.hero__kicker span[aria-hidden] { color: var(--accent); }
+
+.hero__name {
+  position: relative;
+  font-family: var(--f-display);
+  font-weight: 900;
+  /* width- AND height-aware: the whole opening fits one screen on any device */
+  font-size: clamp(64px, min(22.5vw, 34vh), 330px);
+  line-height: 0.8;
+  letter-spacing: 0.015em;
+  perspective: 900px;
+}
+.hero__word { display: inline-flex; position: relative; z-index: 1; }
+.hero__char {
+  display: inline-block;
+  transform-origin: 50% 100%;
+  /* letters further from the centre drift further: a cheap depth cue */
+  translate: calc(var(--px) * var(--i) * -2.2px) calc(var(--py) * -6px);
+  color: var(--off);
+  text-shadow: 0 0 60px rgba(31, 139, 255, 0.18);
+}
+
+/* a horizontal light leak behind the wordmark, like an anamorphic flare */
+.hero__flare {
+  position: absolute;
+  left: -10%;
+  right: -10%;
+  top: 56%;
+  height: 2px;
+  z-index: 0;
+  background: linear-gradient(90deg, transparent, rgba(18, 87, 255, 0) 8%, rgba(31, 139, 255, 0.85) 35%, #f2f9ff 50%, rgba(31, 139, 255, 0.85) 65%, rgba(18, 87, 255, 0) 92%, transparent);
+  box-shadow: 0 0 24px 4px rgba(31, 139, 255, 0.45), 0 0 120px 30px rgba(31, 139, 255, 0.18);
+  translate: calc(var(--px) * 18px) 0;
+  pointer-events: none;
+}
+
+.hero__rule {
+  width: min(520px, 70%);
+  height: 1px;
+  margin: clamp(22px, 4vh, 40px) 0 clamp(16px, 2.5vh, 24px);
+  background: linear-gradient(90deg, transparent, var(--line-strong), transparent);
+}
+
+.hero__roles {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  row-gap: 4px;
+  font-family: var(--f-mono);
+  font-size: clamp(11px, 1.05vw, 14px);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--silver);
+}
+.hero__role { display: inline-flex; overflow: hidden; padding-bottom: 0.1em; }
+.hero__role > span { display: inline-block; }
+.hero__role + .hero__role::before {
+  content: '·';
+  display: inline-block;
+  padding: 0 14px;
+  color: var(--accent);
+}
+
+.hero__statement {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0 0.28em;
+  margin-top: clamp(16px, 5vh, 64px);
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(18px, min(3.2vw, 5.4vh), 46px);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  line-height: 1.05;
+}
+.hero__statement .w { display: inline-block; }
+.hero__statement .hot {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: 0;
+  font-size: 1.12em;
+  color: var(--accent-hi);
+}
+
+.hero__hud {
+  position: absolute;
+  inset: auto var(--gutter) clamp(20px, 4vh, 40px) var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 16px;
+}
+.hero__meta {
+  font-family: var(--f-mono);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.hero__meta--right { text-align: right; }
+.hero__left { display: grid; justify-items: start; gap: 12px; }
+
+.hero__cue { display: inline-flex; justify-content: center; }
+
+@media (max-width: 720px) {
+  .hero__hud { grid-template-columns: 1fr; justify-items: center; }
+  .hero__meta { display: none; }
+  .hero__left { justify-items: center; }
+  .hero__role + .hero__role::before { padding: 0 8px; }
+  .hero__roles { letter-spacing: 0.14em; }
+}
+
+.intro-pending .hero [data-intro],
+.intro-pending .hero__name,
+.intro-pending .hero__roles,
+.intro-pending .hero__statement,
+.intro-pending .hero__rule { opacity: 0; }

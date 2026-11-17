@@ -1,0 +1,89 @@
+.finale {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: clamp(120px, 20vh, 220px) var(--gutter) 0;
+}
+.finale__inner { max-width: var(--max); width: 100%; margin: 0 auto; }
+
+.finale__statement {
+  display: grid;
+  margin-top: 28px;
+  font-family: var(--f-display);
+  font-weight: 900;
+  font-size: clamp(40px, min(10.5vw, 17vh), 176px);
+  line-height: 0.86;
+  text-transform: uppercase;
+  letter-spacing: 0.005em;
+}
+.finale__line { display: flex; flex-wrap: wrap; gap: 0 0.22em; }
+.finale__line:nth-child(2) { padding-left: clamp(0px, 8vw, 140px); }
+.finale__word { display: inline-block; }
+.finale__word.is-hot {
+  font-family: var(--f-serif);
+  font-style: italic;
+  font-weight: 400;
+  text-transform: none;
+  color: var(--accent-hi);
+  text-shadow: 0 0 60px rgba(31, 139, 255, 0.55);
+}
+
+.finale__cta {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    'lede    links'
+    'email   links'
+    'actions links';
+  gap: 22px 48px;
+  margin-top: clamp(56px, 10vh, 120px);
+  padding-top: 36px;
+  border-top: 1px solid var(--line);
+}
+.finale__lede { grid-area: lede; max-width: 52ch; color: var(--silver); font-size: 17px; }
+
+.finale__email { grid-area: email; display: flex; flex-wrap: wrap; align-items: center; gap: 12px 18px; }
+.finale__address {
+  font-family: var(--f-display);
+  font-weight: 700;
+  font-size: clamp(24px, 3.4vw, 48px);
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  background: var(--accent-grad) 0 100% / 0 2px no-repeat;
+  transition: background-size 0.6s var(--ease-out);
+  word-break: break-all;
+}
+.finale__address:hover, .finale__address:focus-visible { background-size: 100% 2px; }
+
+.finale__actions { grid-area: actions; display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+
+.finale__links { grid-area: links; display: flex; flex-direction: column; align-items: flex-start; gap: 10px; }
+
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  max-width: var(--max);
+  width: 100%;
+  margin: clamp(80px, 14vh, 140px) auto 0;
+  padding: 24px 0 32px;
+  border-top: 1px solid var(--line);
+  font-family: var(--f-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+.footer__built { margin-right: auto; }
+
+@media (max-width: 860px) {
+  .finale__cta {
+    grid-template-columns: 1fr;
+    grid-template-areas: 'lede' 'email' 'actions' 'links';
+  }
+  .finale__links { flex-direction: row; flex-wrap: wrap; }
+  .footer__built { margin-right: 0; }
+}

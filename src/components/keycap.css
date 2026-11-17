@@ -1,0 +1,12 @@
+/* Wrapper for the Originkit keycap: spacing for its 3D overhang, focus ring, disabled state. */
+.keycap {
+  display: inline-flex;
+  margin: 0;
+  vertical-align: middle;
+}
+.keycap a:focus-visible,
+.keycap button:focus-visible {
+  outline: 2px solid var(--accent-hi);
+  outline-offset: 4px;
+}
+.keycap.is-disabled { opacity: 0.3; pointer-events: none; }
